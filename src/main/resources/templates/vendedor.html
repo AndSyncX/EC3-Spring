@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>EC3-FER&BUI</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}">
+</head>
+<body>
+  <div class="card">
+
+    <!-- HEADER -->
+    <div class="card-header">
+      1° CÁLCULO DE COMISIONES
+    </div>
+
+    <!-- BODY -->
+    <div class="card-body">
+
+      <!-- FORMULARIO -->
+      <form th:action="@{/calcularcomision}" method="post" th:object="${vendedormodel}">
+
+        <!-- CAMPOS SOLICITADOS -->
+        <div class="mb-3">
+          <label for="txtnombre" class="form-label">TU NOMBRE:</label>
+          <input type="text" th:field="*{nombre}" class="form-control" id="txtnombre">
+        </div>
+
+        <div class="mb-3">
+          <label for="txtventa" class="form-label">VENTAS MENSUALES ($):</label>
+          <input type="number" th:field="*{ventasmensuales}" class="form-control" id="txtventa">
+        </div>
+
+        <!-- CALCULAR COMISION -->
+        <button type="submit" class="btn btn-primary mb-3">CALCULAR</button>
+
+      </form><!-- CIERRE DEL FORMULARIO -->
+
+      <!-- MOSTRAR RESULTADO -->
+      <div th:if="${visualizaralerta}" class="alert" th:classappend="${estilo}" role="alert">
+        <span th:text="${resultado} ?: ''"></span>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
