@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EC3</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}">
+</head>
+<body>
+<div class="card">
+
+    <!-- HEADER -->
+    <div class="card-header">
+        4° CÁLCULO DE IMPUESTO SEGÚN TIPO DE PRODUCTO
+    </div>
+
+    <!-- BODY -->
+    <div class="card-body">
+
+        <!-- FORMULARIO -->
+        <form th:action="@{/calcularimpuesto}" method="post" th:object="${productomodel}">
+
+            <!-- CAMPOS SOLICITADOS -->
+            <div class="mb-3">
+                <label for="cbocategoria" class="form-label">CATEGORÍA:</label>
+                <select name="cbocategoria" id="cbocategoria" th:field="*{categoria}" class="form-select mb-3" th:classappend="${categoria}">
+                    <option value="" selected disabled>-- Seleccionar --</option>
+                    <option value="Electronica">Electronica</option>
+                    <option value="Alimentos">Alimentos</option>
+                    <option value="Ropa">Ropa</option>
+                    <option value="Muebles">Muebles</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="txtpago" class="form-label">MONTO A PAGAR:</label>
+                <input type="number" th:field="*{precio_base}" class="form-control" id="txtpago">
+            </div>
+
+            <!-- CALCULAR PAGO -->
+            <button type="submit" class="btn btn-primary mb-3">CALCULAR</button>
+
+        </form><!-- CIERRE DEL FORMULARIO -->
+
+        <!-- MOSTRAR RESULTADO -->
+        <div th:if="${visualizaralerta}" class="alert" th:classappend="${estilo}" role="alert">
+            <span th:text="${resultado} ?: ''"></span>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
