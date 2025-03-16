@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EC3</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.css}">
+</head>
+<body>
+<div class="card">
+
+    <!-- HEADER -->
+    <div class="card-header">
+        3° BONIFICACIÓN POR PUNTUALIDAD DE PAGOS
+    </div>
+
+    <!-- BODY -->
+    <div class="card-body">
+
+        <!-- FORMULARIO -->
+        <form th:action="@{/calcularbonificacion}" method="post" th:object="${pagomodel}">
+
+            <!-- CAMPOS SOLICITADOS -->
+            <div class="mb-3">
+                <label for="txtdias" class="form-label">DIAS PARA PAGAR:</label>
+                <input type="text" th:field="*{dias_para_pagar}" class="form-control" id="txtdias">
+            </div>
+
+            <div class="mb-3">
+                <label for="txtpago" class="form-label">MONTO A PAGAR:</label>
+                <input type="number" th:field="*{totalapagar}" class="form-control" id="txtpago">
+            </div>
+
+            <!-- CALCULAR PAGO -->
+            <button type="submit" class="btn btn-primary mb-3">CALCULAR</button>
+
+        </form><!-- CIERRE DEL FORMULARIO -->
+
+        <!-- MOSTRAR RESULTADO -->
+        <div th:if="${visualizaralerta}" class="alert" th:classappend="${estilo}" role="alert">
+            <span th:text="${resultado} ?: ''"></span>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
